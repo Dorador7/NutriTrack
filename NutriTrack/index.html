@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriTrack</title>
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Organiza tus comidas, rutinas y progreso con NutriTrack.">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="assets/icons/nutritrack.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Pantalla de bienvenida que inicia el registro del usuario. -->
+
+    <section id="splash">
+
+        <div class="logo">🍏</div>
+
+        <h1>NutriTrack</h1>
+
+        <p>
+            Controla tu nutrición y alcanza tus metas
+        </p>
+
+        <div id="perfilesGuardados" class="saved-profiles hidden">
+            <h2>Perfiles de este dispositivo</h2>
+            <div id="listaPerfiles" class="saved-profile-list"></div>
+        </div>
+
+        <button id="btnIniciarSesion" class="hidden" type="button">
+            Continuar con perfil
+        </button>
+
+        <button id="btnComenzar" type="button">
+            Crear nuevo perfil
+        </button>
+        <button id="btnInstalarApp" class="install-app-button hidden" type="button">
+            Instalar NutriTrack
+        </button>
+
+    </section>
+
+
+    <!-- Introducción breve antes de pedir los datos del perfil. -->
+
+    <section id="onboarding" class="hidden">
+
+        <div class="slide">
+
+            <div class="emoji">🥗</div>
+
+            <h2>Registra tus comidas</h2>
+
+            <p>
+                Lleva control de calorías, proteínas y carbohidratos.
+            </p>
+
+            <button id="btnSiguiente">
+                Siguiente
+            </button>
+
+        </div>
+
+    </section>
+    
+    <!-- Formulario de perfil: sus datos alimentan las metas personalizadas. -->
+    <section id="perfil" class="hidden">
+
+    <div class="perfil-container">
+
+        <h2 id="perfilTitulo">Crear Perfil</h2>
+
+        <div class="foto-perfil">
+            <img id="fotoPerfilPreview" alt="Vista previa de la foto de perfil" hidden>
+            <span id="fotoPerfilIcono" aria-hidden="true">📷</span>
+        </div>
+
+        <form id="perfilForm">
+            <label for="fotoPerfilInput">Foto de perfil</label>
+            <input id="fotoPerfilInput" name="foto" type="file" accept="image/*">
+            <p id="fotoPerfilError" class="form-message" role="alert"></p>
+
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required maxlength="60">
+
+            <label for="edad">Edad</label>
+            <input id="edad" name="edad" type="number" placeholder="Edad (18 o más)" min="18" max="100" required>
+
+            <label for="peso">Peso</label>
+            <input id="peso" name="peso" type="number" placeholder="Peso en kg" min="30" max="300" step="0.1" required>
+
+            <label for="altura">Altura</label>
+            <input id="altura" name="altura" type="number" placeholder="Altura en cm" min="120" max="230" required>
+
+            <label for="sexo">Sexo para la estimación</label>
+            <select id="sexo" name="sexo" required>
+                <option value="">Selecciona una opción</option>
+                <option value="mujer">Mujer</option>
+                <option value="hombre">Hombre</option>
+            </select>
+
+            <label for="actividad">Nivel de actividad</label>
+            <select id="actividad" name="actividad" required>
+                <option value="">Selecciona tu actividad</option>
+                <option value="1.2">Sedentaria (poco o ningún ejercicio)</option>
+                <option value="1.375">Ligera (ejercicio 1-3 días/semana)</option>
+                <option value="1.55">Moderada (ejercicio 3-5 días/semana)</option>
+                <option value="1.725">Alta (ejercicio 6-7 días/semana)</option>
+            </select>
+
+            <label for="objetivo">Tu objetivo</label>
+            <select id="objetivo" name="objetivo" required>
+                <option value="">Selecciona un objetivo</option>
+                <option value="bajar">Bajar peso</option>
+                <option value="mantener">Mantener peso</option>
+                <option value="ganar">Ganar músculo</option>
+            </select>
+
+            <button id="btnGuardarPerfil" type="submit">
+            Guardar Perfil
+            </button>
+        </form>
+        <button id="btnCerrarSesion" class="secondary-button hidden" type="button">
+            Cerrar sesión
+        </button>
+        <section class="recommendation-carousel" aria-label="Recomendaciones">
+            <p class="recommendation-eyebrow">CONSEJO PARA TI</p>
+            <div class="recommendation-content" aria-live="polite">
+                <span class="recommendation-icon" data-recommendation-icon aria-hidden="true"></span>
+                <div>
+                    <h3 data-recommendation-title></h3>
+                    <p data-recommendation-text></p>
+                </div>
+            </div>
+            <div class="recommendation-controls">
+                <button class="recommendation-control" type="button" data-recommendation-direction="-1" aria-label="Recomendación anterior">‹</button>
+                <span class="recommendation-counter" data-recommendation-counter aria-live="polite"></span>
+                <button class="recommendation-control" type="button" data-recommendation-direction="1" aria-label="Siguiente recomendación">›</button>
+            </div>
+        </section>
+
+    </div>
+
+</section>
+
+<!-- Inicio: muestra los datos del usuario, objetivos diarios e historial reciente. -->
+<section id="dashboard" class="hidden">
+
+    <div class="dashboard-container">
+
+        <div class="home-header">
+            <div>
+                <p class="home-eyebrow">NUTRITRACK</p>
+                <h2 id="saludo">Hola 👋</h2>
+            </div>
+            <div class="home-avatar">
+                <img id="fotoPerfilInicio" alt="" hidden>
+                <span id="fotoPerfilInicioIcono" aria-hidden="true">🍏</span>
+            </div>
+        </div>
+        <p id="resumenPerfil" class="profile-summary"></p>
+
+        <!-- El anillo es una representación visual de la meta diaria estimada. -->
+        <div class="calorie-card">
+            <p class="kcal-title">META DIARIA ESTIMADA</p>
+            <div class="calorie-ring" role="img" aria-label="Distribución estimada de calorías entre proteína, carbohidratos y grasas">
+                <div class="calorie-ring-center">
+                    <span class="ring-caption">Tu objetivo</span>
+                    <strong id="calorias">0</strong>
+                    <span class="ring-unit">kcal / día</span>
+                </div>
+            </div>
+            <p class="ring-note">Calculado según tu perfil y objetivo</p>
+        </div>
+
+        <!-- Resumen de los objetivos diarios estimados a partir del perfil. -->
+        <div class="home-section-heading">
+            <h3>Objetivos diarios</h3>
+            <span>Estimados</span>
+        </div>
+        <div class="stats">
+            <div class="stat-card protein-card">
+                <span class="macro-icon">🥩</span>
+                <span>Proteína</span>
+                <p id="proteina">0 g/día</p>
+            </div>
+            <div class="stat-card carbs-card">
+                <span class="macro-icon">🍞</span>
+                <span>Carbohidratos</span>
+                <p id="carbohidratos">0 g/día</p>
+            </div>
+            <div class="stat-card fats-card">
+                <span class="macro-icon">🥑</span>
+                <span>Grasas</span>
+                <p id="grasas">0 g/día</p>
+            </div>
+            <div class="stat-card water-card">
+                <span class="macro-icon">💧</span>
+                <span>Agua</span>
+                <p id="agua">0 L/día</p>
+            </div>
+        </div>
+
+        <!-- Muestra los últimos pesajes registrados; el botón abre Progreso. -->
+        <div class="home-section-heading recent-heading">
+            <h3>Últimos registros</h3>
+            <button type="button" id="verProgreso" class="text-button">Ver progreso</button>
+        </div>
+        <ul id="resumenProgreso" class="recent-progress"></ul>
+
+        <section class="recommendation-carousel" aria-label="Recomendaciones">
+            <p class="recommendation-eyebrow">CONSEJO PARA TI</p>
+            <div class="recommendation-content" aria-live="polite">
+                <span class="recommendation-icon" data-recommendation-icon aria-hidden="true"></span>
+                <div>
+                    <h3 data-recommendation-title></h3>
+                    <p data-recommendation-text></p>
+                </div>
+            </div>
+            <div class="recommendation-controls">
+                <button class="recommendation-control" type="button" data-recommendation-direction="-1" aria-label="Recomendación anterior">‹</button>
+                <span class="recommendation-counter" data-recommendation-counter aria-live="polite"></span>
+                <button class="recommendation-control" type="button" data-recommendation-direction="1" aria-label="Siguiente recomendación">›</button>
+            </div>
+        </section>
+        <p class="disclaimer">Las calorías y métricas son estimaciones generales, no sustituyen el consejo de un profesional de salud.</p>
+    </div>
+
+</section>
+
+<!-- Dieta: muestra metas nutricionales e ideas generales de comidas. -->
+<section id="dieta" class="content-page hidden">
+    <div class="page-container">
+        <h2>🍽 Dieta</h2>
+        <p class="page-intro">Tus objetivos diarios estimados y algunas ideas para organizar tus comidas.</p>
+        <p class="goal-plan-label" data-plan-goal="dieta"></p>
+        <div class="main-card">
+            <p class="kcal-title">Meta diaria</p>
+            <h2><span id="dietaCalorias">0</span> kcal</h2>
+            <p id="dietaMacros" class="kcal-subtitle"></p>
+        </div>
+        <h3 class="section-title">Ideas de comidas</h3>
+        <div class="day-selector" data-day-selector="dieta" role="group" aria-label="Selecciona un día para ver ideas de comida">
+            <button type="button" class="day-button" data-day="lunes" aria-label="Lunes">Lun</button>
+            <button type="button" class="day-button" data-day="martes" aria-label="Martes">Mar</button>
+            <button type="button" class="day-button" data-day="miercoles" aria-label="Miércoles">Mié</button>
+            <button type="button" class="day-button" data-day="jueves" aria-label="Jueves">Jue</button>
+            <button type="button" class="day-button" data-day="viernes" aria-label="Viernes">Vie</button>
+            <button type="button" class="day-button" data-day="sabado" aria-label="Sábado">Sáb</button>
+            <button type="button" class="day-button" data-day="domingo" aria-label="Domingo">Dom</button>
+        </div>
+        <section class="info-carousel" data-content-carousel="comidas" aria-label="Ideas de comidas">
+            <div class="info-carousel-content" aria-live="polite">
+                <span class="info-carousel-icon" data-content-icon aria-hidden="true"></span>
+                <div>
+                    <strong data-content-title></strong>
+                    <p data-content-text></p>
+                </div>
+            </div>
+            <div class="recommendation-controls">
+                <button class="recommendation-control" type="button" data-content-direction="-1" aria-label="Idea de comida anterior">‹</button>
+                <span class="recommendation-counter" data-content-counter aria-live="polite"></span>
+                <button class="recommendation-control" type="button" data-content-direction="1" aria-label="Siguiente idea de comida">›</button>
+            </div>
+        </section>
+        <section class="recommendation-carousel" aria-label="Recomendaciones">
+            <p class="recommendation-eyebrow">CONSEJO PARA TI</p>
+            <div class="recommendation-content" aria-live="polite">
+                <span class="recommendation-icon" data-recommendation-icon aria-hidden="true"></span>
+                <div>
+                    <h3 data-recommendation-title></h3>
+                    <p data-recommendation-text></p>
+                </div>
+            </div>
+            <div class="recommendation-controls">
+                <button class="recommendation-control" type="button" data-recommendation-direction="-1" aria-label="Recomendación anterior">‹</button>
+                <span class="recommendation-counter" data-recommendation-counter aria-live="polite"></span>
+                <button class="recommendation-control" type="button" data-recommendation-direction="1" aria-label="Siguiente recomendación">›</button>
+            </div>
+        </section>
+        <p class="disclaimer">Son ideas generales; ajusta las porciones a tus necesidades y preferencias.</p>
+    </div>
+</section>
+
+<!-- Rutinas: presenta una propuesta básica de actividad física. -->
+<section id="rutinas" class="content-page hidden">
+    <div class="page-container">
+        <h2>🏋 Rutinas</h2>
+        <p class="page-intro">Una propuesta sencilla para empezar. Ajusta la intensidad a tu experiencia.</p>
+        <p class="goal-plan-label" data-plan-goal="rutinas"></p>
+        <h3 class="section-title">Plan semanal</h3>
+        <div class="day-selector" data-day-selector="rutinas" role="group" aria-label="Selecciona un día para ver la rutina">
+            <button type="button" class="day-button" data-day="lunes" aria-label="Lunes">Lun</button>
+            <button type="button" class="day-button" data-day="martes" aria-label="Martes">Mar</button>
+            <button type="button" class="day-button" data-day="miercoles" aria-label="Miércoles">Mié</button>
+            <button type="button" class="day-button" data-day="jueves" aria-label="Jueves">Jue</button>
+            <button type="button" class="day-button" data-day="viernes" aria-label="Viernes">Vie</button>
+            <button type="button" class="day-button" data-day="sabado" aria-label="Sábado">Sáb</button>
+            <button type="button" class="day-button" data-day="domingo" aria-label="Domingo">Dom</button>
+        </div>
+        <section class="info-carousel" data-content-carousel="rutinas" aria-label="Rutinas de ejercicio">
+            <div class="info-carousel-content" aria-live="polite">
+                <span class="info-carousel-icon" data-content-icon aria-hidden="true"></span>
+                <div>
+                    <strong data-content-title></strong>
+                    <p data-content-text></p>
+                </div>
+            </div>
+            <div class="recommendation-controls">
+                <button class="recommendation-control" type="button" data-content-direction="-1" aria-label="Rutina anterior">‹</button>
+                <span class="recommendation-counter" data-content-counter aria-live="polite"></span>
+                <button class="recommendation-control" type="button" data-content-direction="1" aria-label="Siguiente rutina">›</button>
+            </div>
+        </section>
+        <section class="recommendation-carousel" aria-label="Recomendaciones">
+            <p class="recommendation-eyebrow">CONSEJO PARA TI</p>
+            <div class="recommendation-content" aria-live="polite">
+                <span class="recommendation-icon" data-recommendation-icon aria-hidden="true"></span>
+                <div>
+                    <h3 data-recommendation-title></h3>
+                    <p data-recommendation-text></p>
+                </div>
+            </div>
+            <div class="recommendation-controls">
+                <button class="recommendation-control" type="button" data-recommendation-direction="-1" aria-label="Recomendación anterior">‹</button>
+                <span class="recommendation-counter" data-recommendation-counter aria-live="polite"></span>
+                <button class="recommendation-control" type="button" data-recommendation-direction="1" aria-label="Siguiente recomendación">›</button>
+            </div>
+        </section>
+        <p class="disclaimer">Empieza gradualmente y detente si sientes dolor. Consulta a un profesional si tienes dudas de salud.</p>
+    </div>
+</section>
+
+<!-- Progreso: permite guardar el peso y consultar los registros previos. -->
+<section id="progreso" class="content-page hidden">
+    <div class="page-container">
+        <h2>📈 Progreso</h2>
+        <p class="page-intro">Registra tu peso cuando quieras y consulta tus registros anteriores.</p>
+        <form id="progresoForm">
+            <label for="pesoActual">Peso de hoy (kg)</label>
+            <input id="pesoActual" name="peso" type="number" min="30" max="300" step="0.1" required>
+            <button type="submit">Guardar peso</button>
+        </form>
+        <h3 class="section-title">Registros</h3>
+        <ul id="listaProgreso" class="progress-list"></ul>
+        <section class="recommendation-carousel" aria-label="Recomendaciones">
+            <p class="recommendation-eyebrow">CONSEJO PARA TI</p>
+            <div class="recommendation-content" aria-live="polite">
+                <span class="recommendation-icon" data-recommendation-icon aria-hidden="true"></span>
+                <div>
+                    <h3 data-recommendation-title></h3>
+                    <p data-recommendation-text></p>
+                </div>
+            </div>
+            <div class="recommendation-controls">
+                <button class="recommendation-control" type="button" data-recommendation-direction="-1" aria-label="Recomendación anterior">‹</button>
+                <span class="recommendation-counter" data-recommendation-counter aria-live="polite"></span>
+                <button class="recommendation-control" type="button" data-recommendation-direction="1" aria-label="Siguiente recomendación">›</button>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Navegación inferior para cambiar entre las cinco secciones principales. -->
+<nav id="bottomNav" class="bottom-nav hidden" aria-label="Navegación principal">
+    <button type="button" class="nav-item active" data-tab="dashboard" aria-current="page">🏠<span>Inicio</span></button>
+    <button type="button" class="nav-item" data-tab="dieta">🍽<span>Dieta</span></button>
+    <button type="button" class="nav-item" data-tab="rutinas">🏋<span>Rutinas</span></button>
+    <button type="button" class="nav-item" data-tab="progreso">📈<span>Progreso</span></button>
+    <button type="button" class="nav-item" data-tab="perfil">👤<span>Perfil</span></button>
+</nav>
+
+</body>
+
+</html>

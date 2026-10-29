@@ -1,0 +1,915 @@
+/* Reinicio básico para que los tamaños incluyan padding y bordes. */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* Tipografía y estilos generales reutilizables en la aplicación. */
+body{
+    background:#000;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.app{
+    max-width:430px;
+    margin:auto;
+    min-height:100vh;
+    padding:25px;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+h1{
+    font-size:52px;
+    font-weight:800;
+}
+
+.subtitle{
+    color:#8a8a8a;
+    font-size:22px;
+    margin-top:5px;
+}
+
+.settings{
+    width:70px;
+    height:70px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#1a1a1a;
+
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
+}
+/* Centra las pantallas iniciales y limita el diseño a la altura visible. */
+body{
+    background:#000;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:100vh;
+}
+
+/* Apariencia de la bienvenida, botones y elementos del onboarding. */
+#splash{
+    text-align:center;
+    width:90%;
+}
+
+.saved-profiles{
+    width:min(100%, 360px);
+    margin:24px auto;
+    text-align:left;
+}
+
+.saved-profiles h2{
+    margin-bottom:12px;
+    font-size:17px;
+    text-align:center;
+}
+
+.saved-profile-list{
+    display:grid;
+    gap:10px;
+}
+
+.saved-profile{
+    width:100%;
+    height:50px;
+    padding:0 16px;
+    border:1px solid #343434;
+    border-radius:14px;
+    background:#151515;
+    color:#fff;
+    font-size:15px;
+    text-align:left;
+}
+
+.saved-profile.selected{
+    border-color:#C7FF00;
+    background:#252d14;
+    color:#C7FF00;
+}
+
+#splash #btnIniciarSesion:not(.hidden),
+#splash #btnComenzar:not(.hidden){
+    display:block;
+    width:min(100%, 360px);
+    margin:10px auto;
+}
+
+#splash #btnInstalarApp:not(.hidden){
+    display:block;
+    width:min(100%, 360px);
+    height:48px;
+    margin:10px auto;
+    border:1px solid #C7FF00;
+    background:#171717;
+    color:#C7FF00;
+    font-size:15px;
+}
+
+.logo{
+    font-size:80px;
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+p{
+    color:#9b9b9b;
+    font-size:18px;
+    margin-bottom:40px;
+}
+
+button{
+    background:#C7FF00;
+    border:none;
+
+    width:220px;
+    height:60px;
+
+    border-radius:30px;
+
+    font-size:20px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+.hidden{
+    display:none;
+}
+
+.emoji{
+    font-size:90px;
+    margin-bottom:20px;
+}
+
+h2{
+    margin-bottom:15px;
+}
+
+.slide{
+    text-align:center;
+    width:100%;
+}
+/* Animación de entrada para la bienvenida y la introducción. */
+@keyframes aparecer {
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+#splash,
+#onboarding{
+    animation:aparecer .6s ease;
+}
+/* Diseño del avatar y formulario para crear o editar el perfil. */
+.perfil-container{
+    width:100%;
+    max-width:420px;
+    text-align:center;
+}
+
+.foto-perfil{
+    width:120px;
+    height:120px;
+
+    margin:20px auto;
+
+    border-radius:50%;
+
+    background:#1A1A1A;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:50px;
+
+    border:2px solid #C7FF00;
+    overflow:hidden;
+}
+
+.foto-perfil img,
+.home-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.home-avatar img[hidden],
+.foto-perfil img[hidden]{
+    display:none;
+}
+
+.form-message{
+    min-height:0;
+    margin:0 0 12px;
+    color:#ff8a80;
+    font-size:13px;
+    line-height:1.4;
+    text-align:left;
+}
+
+input,
+select{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-bottom:15px;
+
+    background:#151515;
+
+    color:white;
+
+    border:1px solid #2e2e2e;
+
+    border-radius:15px;
+
+    font-size:16px;
+}
+
+/* Distribución y dimensiones de las pantallas de perfil e inicio. */
+#perfil,
+#dashboard{
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    padding:25px;
+}
+
+#perfil{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding-top:32px;
+    padding-bottom:calc(110px + env(safe-area-inset-bottom));
+}
+
+#perfil label{
+    display:block;
+    margin:0 0 8px;
+    text-align:left;
+    color:#bdbdbd;
+    font-size:14px;
+}
+
+#perfil input,
+#perfil select{
+    display:block;
+}
+
+#perfil button{
+    width:100%;
+    margin-top:8px;
+}
+
+#perfil .secondary-button{
+    margin-top:14px;
+    border:1px solid #3a3a3a;
+    background:#191919;
+    color:#fff;
+}
+
+#dashboard{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+}
+
+#perfil.hidden,
+#dashboard.hidden{
+    display:none;
+}
+
+.profile-summary{
+    margin:10px 0 20px;
+    font-size:15px;
+}
+
+.disclaimer{
+    margin:20px 0 0;
+    font-size:12px;
+    line-height:1.5;
+}
+/* Tarjetas y cuadrícula de métricas del panel de inicio. */
+.dashboard-container{
+    width:100%;
+    max-width:420px;
+}
+
+.main-card{
+
+    background:#151515;
+
+    border:2px solid #C7FF00;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    margin-top:20px;
+
+    text-align:center;
+}
+
+.kcal-title{
+    color:#9b9b9b;
+}
+
+.kcal-number{
+    color:#C7FF00;
+    font-size:60px;
+    margin:15px 0;
+}
+
+.kcal-subtitle{
+    color:#9b9b9b;
+}
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+    margin-top:20px;
+}
+
+.stat-card{
+
+    background:#151515;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    text-align:center;
+}
+
+.stat-card h3{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.stat-card span{
+    color:#9b9b9b;
+}
+
+.stat-card p{
+    color:white;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+/* Estilos compartidos por Dieta, Rutinas y Progreso. */
+.content-page{
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    padding:35px 25px 110px;
+}
+
+.page-container{
+    width:100%;
+}
+
+.page-intro{
+    margin:8px 0 22px;
+    font-size:15px;
+    line-height:1.5;
+}
+
+.goal-plan-label{
+    margin:-12px 0 18px;
+    color:#C7FF00;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.section-title{
+    margin:24px 0 12px;
+}
+
+.info-card{
+    background:#151515;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:12px;
+}
+
+.info-card p{
+    margin:8px 0 0;
+    font-size:15px;
+    line-height:1.5;
+}
+
+.day-selector{
+    display:grid;
+    grid-template-columns:repeat(7, minmax(0, 1fr));
+    gap:6px;
+    margin:0 0 12px;
+}
+
+.day-button{
+    width:auto;
+    height:38px;
+    padding:0 2px;
+    border:1px solid #303030;
+    border-radius:11px;
+    background:#171717;
+    color:#aaa;
+    font-size:12px;
+    font-weight:700;
+}
+
+.day-button.active{
+    border-color:#C7FF00;
+    background:#252d14;
+    color:#C7FF00;
+}
+
+.day-button:focus-visible{
+    outline:2px solid #C7FF00;
+    outline-offset:2px;
+}
+
+.info-carousel{
+    margin-bottom:12px;
+    padding:18px;
+    border:1px solid #292929;
+    border-radius:18px;
+    background:#151515;
+}
+
+.info-carousel-content{
+    display:flex;
+    min-height:72px;
+    align-items:flex-start;
+    gap:12px;
+}
+
+.info-carousel-content strong{
+    display:block;
+    margin:2px 0 8px;
+    color:#fff;
+    font-size:16px;
+}
+
+.info-carousel-content p{
+    margin:0;
+    color:#b6b6b6;
+    font-size:15px;
+    line-height:1.5;
+}
+
+.info-carousel-icon{
+    display:grid;
+    width:40px;
+    height:40px;
+    flex:none;
+    place-items:center;
+    border-radius:12px;
+    background:#242424;
+    font-size:21px;
+}
+
+.recommendation-carousel{
+    margin:20px 0 14px;
+    padding:17px;
+    border:1px solid #394719;
+    border-radius:18px;
+    background:linear-gradient(135deg, #1a2110, #151515 72%);
+}
+
+.recommendation-eyebrow{
+    margin:0 0 13px;
+    color:#C7FF00;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1.3px;
+}
+
+.recommendation-content{
+    display:flex;
+    min-height:72px;
+    align-items:flex-start;
+    gap:12px;
+}
+
+.recommendation-icon{
+    display:grid;
+    width:38px;
+    height:38px;
+    flex:none;
+    place-items:center;
+    border-radius:12px;
+    background:#292f1e;
+    font-size:20px;
+}
+
+.recommendation-content h3{
+    margin:1px 0 5px;
+    color:#fff;
+    font-size:15px;
+}
+
+.recommendation-content p{
+    margin:0;
+    color:#b6b6b6;
+    font-size:13px;
+    line-height:1.45;
+}
+
+.recommendation-controls{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:10px;
+}
+
+.recommendation-control{
+    display:grid;
+    width:30px;
+    height:30px;
+    place-items:center;
+    border:1px solid #3a3a3a;
+    border-radius:50%;
+    background:#202020;
+    color:#C7FF00;
+    font-size:22px;
+    line-height:1;
+}
+
+.recommendation-control:focus-visible{
+    outline:2px solid #C7FF00;
+    outline-offset:2px;
+}
+
+.recommendation-counter{
+    min-width:36px;
+    color:#a0a0a0;
+    font-size:11px;
+    text-align:center;
+}
+
+.content-page .main-card{
+    margin-top:0;
+}
+
+#progresoForm label{
+    display:block;
+    margin-bottom:8px;
+    color:#bdbdbd;
+}
+
+#progresoForm button{
+    width:100%;
+}
+
+.progress-list{
+    list-style:none;
+}
+
+.progress-list li{
+    background:#151515;
+    border-radius:14px;
+    padding:14px 16px;
+    margin-bottom:10px;
+}
+
+/* Barra fija inferior y estados de sus botones de navegación. */
+.bottom-nav{
+    position:fixed;
+    z-index:10;
+    right:0;
+    bottom:0;
+    left:0;
+    display:flex;
+    justify-content:center;
+    gap:4px;
+    padding:10px max(8px, calc((100vw - 430px) / 2)) calc(10px + env(safe-area-inset-bottom));
+    background:#111;
+    border-top:1px solid #292929;
+}
+
+.bottom-nav.hidden{
+    display:none;
+}
+
+.nav-item{
+    display:flex;
+    flex:1;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    width:auto;
+    height:auto;
+    min-height:52px;
+    padding:6px 2px;
+    border-radius:12px;
+    background:transparent;
+    color:#9b9b9b;
+    font-size:20px;
+    font-weight:normal;
+}
+
+.nav-item span{
+    font-size:11px;
+}
+
+.nav-item.active{
+    color:#C7FF00;
+    background:#1d1d1d;
+}
+
+/* Tema oscuro del inicio con contraste para textos y tarjetas. */
+#dashboard{
+    background:#000;
+    color:#fff;
+    padding:24px 20px 112px;
+}
+
+#dashboard .dashboard-container{
+    max-width:390px;
+}
+
+#dashboard h2{
+    margin:0;
+    font-size:25px;
+}
+
+#dashboard p{
+    color:#a0a0a0;
+}
+
+/* Encabezado del inicio y resumen del perfil del usuario. */
+.home-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:6px;
+}
+
+.home-eyebrow{
+    margin:0 0 5px !important;
+    color:#858b94 !important;
+    font-size:10px !important;
+    font-weight:700;
+    letter-spacing:1.5px;
+}
+
+.home-avatar{
+    display:grid;
+    width:44px;
+    height:44px;
+    place-items:center;
+    border-radius:50%;
+    background:#151515;
+    box-shadow:0 3px 14px #0008;
+    font-size:23px;
+    overflow:hidden;
+}
+
+#dashboard .profile-summary{
+    margin:5px 0 20px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* Tarjeta de calorías y anillo gráfico de distribución de macronutrientes. */
+.calorie-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:22px 16px 18px;
+    border-radius:24px;
+    background:#151515;
+    box-shadow:0 5px 22px #0008;
+}
+
+.calorie-card .kcal-title{
+    margin:0 0 18px;
+    color:#a0a0a0;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.2px;
+}
+
+.calorie-ring{
+    display:grid;
+    width:218px;
+    aspect-ratio:1;
+    place-items:center;
+    border-radius:50%;
+    background:conic-gradient(
+        #ff593c 0deg 90deg,
+        #a83ed1 90deg 252deg,
+        #19b9cf 252deg 360deg
+    );
+    transform:rotate(-90deg);
+}
+
+.calorie-ring-center{
+    display:flex;
+    width:174px;
+    aspect-ratio:1;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#151515;
+    transform:rotate(90deg);
+}
+
+.ring-caption,
+.ring-unit{
+    color:#a0a0a0;
+    font-size:12px;
+}
+
+.calorie-ring-center strong{
+    margin:5px 0 2px;
+    color:#fff;
+    font-size:36px;
+    line-height:1;
+}
+
+.ring-note{
+    margin:13px 0 0;
+    font-size:12px;
+}
+
+/* Encabezados, metas nutricionales y registros recientes del inicio. */
+.home-section-heading{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:24px 2px 12px;
+}
+
+.home-section-heading h3{
+    color:#fff;
+    font-size:17px;
+}
+
+.home-section-heading > span{
+    color:#a0a0a0;
+    font-size:12px;
+}
+
+#dashboard .stats{
+    gap:10px;
+    margin-top:0;
+}
+
+#dashboard .stat-card{
+    display:grid;
+    min-height:94px;
+    grid-template-columns:34px 1fr;
+    align-content:center;
+    align-items:center;
+    column-gap:8px;
+    padding:13px;
+    border:1px solid #292929;
+    border-radius:17px;
+    background:#151515;
+    text-align:left;
+}
+
+.macro-icon{
+    display:grid;
+    width:32px;
+    height:32px;
+    grid-row:span 2;
+    place-items:center;
+    border-radius:50%;
+    background:#242424;
+    font-size:17px;
+}
+
+#dashboard .stat-card > span:not(.macro-icon){
+    color:#a0a0a0;
+    font-size:12px;
+}
+
+#dashboard .stat-card p{
+    margin:4px 0 0;
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
+}
+
+.protein-card .macro-icon{background:#38251f}
+.carbs-card .macro-icon{background:#30223a}
+.fats-card .macro-icon{background:#1d3436}
+.water-card .macro-icon{background:#3a3020}
+
+.recent-heading{
+    margin-top:25px;
+}
+
+.text-button{
+    width:auto;
+    height:auto;
+    padding:6px 0 6px 10px;
+    border-radius:0;
+    background:transparent;
+    color:#168fa0;
+    font-size:12px;
+    font-weight:700;
+}
+
+.recent-progress{
+    overflow:hidden;
+    list-style:none;
+    border-radius:16px;
+    background:#151515;
+}
+
+.recent-progress li{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:14px 15px;
+    border-bottom:1px solid #292929;
+    color:#d0d0d0;
+    font-size:13px;
+}
+
+.recent-progress li:last-child{
+    border-bottom:0;
+}
+
+.progress-indicator{
+    width:11px;
+    height:11px;
+    flex:none;
+    border-radius:50%;
+    background:#19b9cf;
+}
+
+.recent-progress li:nth-child(2) .progress-indicator{background:#a83ed1}
+.recent-progress li:nth-child(3) .progress-indicator{background:#ff593c}
+
+#dashboard .recent-progress .empty-progress{
+    color:#a0a0a0;
+}
+
+#dashboard .disclaimer{
+    margin:17px 2px 0;
+    font-size:11px;
+}
+
+#dashboard + .content-page{
+    padding-bottom:110px;
+}
+
+/* Reduce el anillo y los márgenes en pantallas móviles pequeñas. */
+@media (max-width:360px){
+    #dashboard{
+        padding-right:14px;
+        padding-left:14px;
+    }
+
+    .calorie-ring{
+        width:195px;
+    }
+
+    .calorie-ring-center{
+        width:155px;
+    }
+}
